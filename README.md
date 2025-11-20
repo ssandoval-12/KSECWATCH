@@ -56,8 +56,8 @@ The project includes a complete observability pipeline with:
 
 # 🧹 1. Wipe Environment (Clean Start)
 
-minikube delete --all --purge
-docker system prune -af --volumes
+minikube delete --all --purge br>
+docker system prune -af --volumes br>
 rm -rf ~/.kube ~/.minikube
 
 ---
@@ -190,3 +190,4 @@ ALERTS{alertstate="firing"}
 ---
 
 # 13. 🎉 KSECWATCH Completed!
+
