@@ -15,6 +15,7 @@ The project includes a complete observability pipeline with:
 ---
 
 # 📂 Repository Structure
+```text
 .
 ├── application
 │ ├── main.py
@@ -39,7 +40,7 @@ The project includes a complete observability pipeline with:
 │
 ├── .gitignore
 └── README.md
-
+```
 ---
 
 # ⚙️ Requirements
@@ -187,4 +188,5 @@ PromQL query must include:
 ALERTS{alertstate="firing"}
 
 ---
+
 # 13. 🎉 KSECWATCH Completed!
