@@ -64,85 +64,85 @@ rm -rf ~/.kube ~/.minikube
 
 # 🚀 2. Start Minikube
 
-minikube start --driver=docker --memory=4096 --cpus=2
-kubectl create namespace monitoring
+minikube start --driver=docker --memory=4096 --cpus=2 <br>
+kubectl create namespace monitoring <br>
 
 ---
 
 # 📦 3. Build & Load Docker Image
 
-docker build -t ksecwatch-app:0.1 .
-minikube image load ksecwatch-app:0.1
+docker build -t ksecwatch-app:0.1 <br>
+minikube image load ksecwatch-app:0.1 <br>
 
 ---
 
 # 📥 4. Install kube-prometheus-stack (with Grafana password)
 
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts <br>
+helm repo update <br>
 
-helm install kps prometheus-community/kube-prometheus-stack \
-  --namespace monitoring \
-  --set grafana.adminPassword="NuevaPass123!" \
-  --set grafana.service.type=ClusterIP \
-  --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false \
+helm install kps prometheus-community/kube-prometheus-stack \ <br>
+  --namespace monitoring \ <br>
+  --set grafana.adminPassword="NuevaPass123!" \ <br>
+  --set grafana.service.type=ClusterIP \ <br>
+  --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false \ <br>
   --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues=false
 
 ---
 
 # 🔐 5. Create Secure Slack Secret
 
-kubectl create secret generic slack-webhook \
-  --from-literal=url="https://hooks.slack.com/services/XXX/YYY/ZZZ" \
+kubectl create secret generic slack-webhook \ <br>
+  --from-literal=url="https://hooks.slack.com/services/XXX/YYY/ZZZ" \ <br>
   -n monitoring
 
 ---
 
 # 🚀 6. Deploy KSECWATCH & Monitoring Rules
 
-kubectl apply -f kubernetes/deployment.yaml
-kubectl apply -f kubernetes/service.yaml
-kubectl apply -f kubernetes/ksecwatch-servicemonitor.yaml
-kubectl apply -f kubernetes/security-alerts.yaml
-kubectl apply -f kubernetes/pod-changes-alerts.yaml
-kubectl apply -f kubernetes/alertmanagerconfig-ksecwatch.yaml
+kubectl apply -f kubernetes/deployment.yaml <br>
+kubectl apply -f kubernetes/service.yaml <br>
+kubectl apply -f kubernetes/ksecwatch-servicemonitor.yaml <br>
+kubectl apply -f kubernetes/security-alerts.yaml <br>
+kubectl apply -f kubernetes/pod-changes-alerts.yaml <br>
+kubectl apply -f kubernetes/alertmanagerconfig-ksecwatch.yaml <br>
 
 ---
 
 # 📡 7. Access UIs
 
 Prometheus
-kubectl port-forward svc/kps-kube-prometheus-stack-prometheus -n monitoring 9091:9090
-http://localhost:9091
+kubectl port-forward svc/kps-kube-prometheus-stack-prometheus -n monitoring 9091:9090 <br>
+http://localhost:9091 <br>
 
-Alertmanager
-kubectl port-forward svc/kps-kube-prometheus-stack-alertmanager -n monitoring 9003:9093
+Alertmanager <br>
+kubectl port-forward svc/kps-kube-prometheus-stack-alertmanager -n monitoring 9003:9093 <br>
 http://localhost:9003
 
-Grafana
-kubectl port-forward svc/kps-grafana -n monitoring 3001:80
-http://localhost:3001
-Login:
+Grafana <br>
+kubectl port-forward svc/kps-grafana -n monitoring 3001:80 <br>
+http://localhost:3001 <br>
+Login: <br>
 admin / NuevaPass123!
 
 ---
 
 # 📊 8. Import Dashboard
 
-Upload this file in Grafana:
+Upload this file in Grafana: <br>
 dashboards/security-pod-dashboard.json
 
 ---
 
 # 🧪 9. Testing
 
-Trigger metrics
-kubectl port-forward deploy/ksecwatch -n monitoring 8000:8000
-curl localhost:8000/login-fail
-curl localhost:8000/unauthorized
-curl localhost:8000/config-change
+Trigger metrics <br>
+kubectl port-forward deploy/ksecwatch -n monitoring 8000:8000 <br>
+curl localhost:8000/login-fail <br>
+curl localhost:8000/unauthorized <br>
+curl localhost:8000/config-change <br>
 
-Generate alert spike
+Generate alert spike <br>
 for i in {1..15}; do curl localhost:8000/login-fail; done
 
 ---
@@ -190,5 +190,6 @@ ALERTS{alertstate="firing"}
 ---
 
 # 13. 🎉 KSECWATCH Completed!
+
 
 
