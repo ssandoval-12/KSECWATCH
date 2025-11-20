@@ -1,0 +1,95 @@
+{
+  "uid": "ksecwatch-sec-pods",
+  "title": "KSECWATCH – Security & Pods (Enhanced)",
+  "tags": ["ksecwatch","security","pods"],
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 3,
+  "refresh": "10s",
+  "time": { "from": "now-30m", "to": "now" },
+
+  "templating": {
+    "list": [
+      {
+        "type": "datasource",
+        "name": "DS_PROMETHEUS",
+        "query": "prometheus",
+        "current": { "text": "Prometheus", "value": "Prometheus" }
+      }
+    ]
+  },
+
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Login failures (rate 5m)",
+      "gridPos": {"x":0,"y":0,"w":12,"h":8},
+      "targets": [
+        { "expr": "rate(security_login_failures_total[5m])", "legendFormat": "login_failures/s" }
+      ],
+      "options": { "legend": { "displayMode": "list", "placement": "right" } }
+    },
+    {
+      "type": "timeseries",
+      "title": "Unauthorized attempts (rate 5m)",
+      "gridPos": {"x":12,"y":0,"w":12,"h":8},
+      "targets": [
+        { "expr": "rate(security_unauthorized_attempts_total[5m])", "legendFormat": "unauthorized/s" }
+      ],
+      "options": { "legend": { "displayMode": "list", "placement": "right" } }
+    },
+    {
+      "type": "timeseries",
+      "title": "Config changes (rate 5m)",
+      "gridPos": {"x":0,"y":8,"w":12,"h":8},
+      "targets": [
+        { "expr": "rate(security_config_changes_total[5m])", "legendFormat": "config_changes/s" }
+      ],
+      "options": { "legend": { "displayMode": "list", "placement": "right" } }
+    },
+    {
+      "type": "timeseries",
+      "title": "Pod restarts (increase 5m)",
+      "gridPos": {"x":12,"y":8,"w":12,"h":8},
+      "targets": [
+        { "expr": "increase(kube_pod_container_status_restarts_total[5m])", "legendFormat": "{{namespace}}/{{pod}}" }
+      ],
+      "options": { "legend": { "displayMode": "list", "placement": "right" } }
+    },
+
+    {
+      "type": "table",
+      "title": "🔥 KSECWATCH — Firing Alerts Only",
+      "description": "Shows only alerts labeled project=\"ksecwatch\"",
+      "gridPos": {"x":0,"y":16,"w":24,"h":8},
+      "targets": [
+        {
+          "expr": "ALERTS{alertstate=\"firing\", project=\"ksecwatch\"}",
+          "legendFormat": "{{alertname}}",
+          "format": "table",
+          "instant": true
+        }
+      ],
+      "transformations": [
+        { "id": "organize", "options": {} }
+      ],
+      "options": {
+        "showHeader": true,
+        "footer": { "show": false }
+      }
+    },
+
+    {
+      "type": "table",
+      "title": "⚡ All Firing Alerts (Full Cluster)",
+      "gridPos": {"x":0,"y":24,"w":24,"h":8},
+      "targets": [
+        {
+          "expr": "ALERTS{alertstate=\"firing\"}",
+          "format": "table",
+          "instant": true
+        }
+      ]
+    }
+  ]
+}

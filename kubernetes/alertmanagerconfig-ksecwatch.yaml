@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: ksecwatch
+  namespace: monitoring
+  labels:
+    release: kps
+spec:
+  route:
+    receiver: slack-ksecwatch
+    groupBy:
+      - alertname
+    groupWait: 10s
+    groupInterval: 30s
+    repeatInterval: 1m
+
+  receivers:
+    - name: slack-ksecwatch
+      slackConfigs:
+        - apiURL:
+            name: slack-webhook
+            key: url
+          channel: "#ksecwatch-alerts"
+          sendResolved: true
+          username: "KSECWATCH Bot"
+          title: >-
+            {{ if eq .Status "firing" }}
+              🚨 [{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}
+            {{ else }}
+              🟢 [{{ .Status | toUpper }}] {{ .CommonLabels.alertname }}
+            {{ end }}
+          text: >-
+            {{ if eq .Status "firing" }}
+              🔥 *Severity:* {{ .CommonLabels.severity }}
+              🧩 *Project:* {{ .CommonLabels.project }}
+              📂 *Category:* {{ .CommonLabels.category }}
+              📝 *Description:* {{ .CommonAnnotations.description }}
+            {{ else }}
+              👌 Issue has been resolved.
+            {{ end }}

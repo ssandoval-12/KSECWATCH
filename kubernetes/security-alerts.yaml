@@ -1,0 +1,44 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: security-alerts
+  namespace: monitoring
+  labels:
+    release: kps
+spec:
+  groups:
+    - name: ksecwatch-security-alerts
+      rules:
+
+        - alert: LoginFailureSpike
+          expr: increase(security_login_failures_total[1m]) > 5
+          for: 30s
+          labels:
+            severity: warning
+            team: sre
+            category: auth
+            project: ksecwatch
+          annotations:
+            description: "High volume of failed logins detected."
+
+        - alert: UnauthorizedAttemptsSpike
+          expr: increase(security_unauthorized_attempts_total[1m]) > 3
+          for: 30s
+          labels:
+            severity: warning
+            team: sre
+            category: access
+            project: ksecwatch
+          annotations:
+            description: "Unauthorized access attempts detected."
+
+        - alert: ConfigChangesSpike
+          expr: increase(security_config_changes_total[1m]) > 2
+          for: 30s
+          labels:
+            severity: info
+            team: sre
+            category: config
+            project: ksecwatch
+          annotations:
+            description: "Multiple configuration changes detected."

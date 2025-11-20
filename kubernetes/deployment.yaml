@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ksecwatch
+  namespace: monitoring
+  labels:
+    app: ksecwatch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ksecwatch
+  template:
+    metadata:
+      labels:
+        app: ksecwatch
+    spec:
+      containers:
+        - name: ksecwatch
+          image: ksecwatch-app:0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
