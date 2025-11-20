@@ -168,10 +168,10 @@ for i in {1..15}; do curl localhost:8000/login-fail; done
 
 # 🖼️ 11. Screenshots
 
-Slack Alerts: <br>
-Alertmanager UI: <br>
-Grafana Dashboard: <br>
-Prometheus Targets: <br>
+![Slack Screenshot](screenshots/slack.png) <br>
+![Alertmanager UI](screenshots/alertmanager.png) <br>
+![Grafana Dashboard](screenshots/grafana.png) <br>
+![Prometheus Target](screenshots/prometheus.png)
 
 ---
 
@@ -194,6 +194,7 @@ ALERTS{alertstate="firing"}
 ---
 
 # 13. 🎉 KSECWATCH Completed!
+
 
 
 
