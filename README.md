@@ -149,7 +149,7 @@ for i in {1..15}; do curl localhost:8000/login-fail; done
 
 # 🛎️ 10. Slack Notifications
 
-## 🔥 FIRING Example
+🔥 FIRING Example
 
 🚨 **[FIRING] LoginFailureSpike**  
 🔥 **Severity:** warning  
@@ -159,7 +159,7 @@ for i in {1..15}; do curl localhost:8000/login-fail; done
 
 ---
 
-## 🟢 RESOLVED Example
+🟢 RESOLVED Example
 
 🟢 **[RESOLVED] LoginFailureSpike**  
 👌 Issue has been resolved.
@@ -194,6 +194,7 @@ ALERTS{alertstate="firing"}
 ---
 
 # 13. 🎉 KSECWATCH Completed!
+
 
 
 
