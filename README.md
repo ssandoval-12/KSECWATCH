@@ -149,22 +149,26 @@ for i in {1..15}; do curl localhost:8000/login-fail; done
 
 # 🛎️ 10. Slack Notifications
 
-FIRING Example:
-🚨 [FIRING] LoginFailureSpike
-🔥 Severity: warning
-🧩 Project: ksecwatch
-📂 Category: auth
-📝 Description: High volume of failed logins detected.
+## 🔥 FIRING Example
 
-RESOLVED Example:
-🟢 [RESOLVED] LoginFailureSpike
+🚨 **[FIRING] LoginFailureSpike**  
+🔥 **Severity:** warning  
+🧩 **Project:** ksecwatch  
+📂 **Category:** auth  
+📝 **Description:** High volume of failed logins detected.  
+
+---
+
+## 🟢 RESOLVED Example
+
+🟢 **[RESOLVED] LoginFailureSpike**  
 👌 Issue has been resolved.
 
 ---
 
 # 🖼️ 11. Screenshots
 
-Slack Alerts
+Slack Alerts 
 Alertmanager UI
 Grafana Dashboard
 Prometheus Targets
@@ -173,23 +177,24 @@ Prometheus Targets
 
 # 🛠️ 12. Troubleshooting
 
-Pod not scraped
-Check matchLabels in ServiceMonitor:
-   selector:
-  matchLabels:
+- Pod not scraped <br>
+Check matchLabels in ServiceMonitor: <br>
+   selector: <br>
+  matchLabels: <br>
     app: ksecwatch
 
-Slack not receiving alerts
-Verify secret exists:
-kubectl get secret slack-webhook -n monitoring -o yaml
+- Slack not receiving alerts <br>
+Verify secret exists: <br>
+kubectl get secret slack-webhook -n monitoring -o yaml 
 
-Dashboard shows no alerts
-PromQL query must include:
+- Dashboard shows no alerts <br>
+PromQL query must include: <br>
 ALERTS{alertstate="firing"}
 
 ---
 
 # 13. 🎉 KSECWATCH Completed!
+
 
 
 
