@@ -7,65 +7,80 @@ This project is designed for SRE/Monitoring education, using Kubernetes, Prometh
 
 ---
 
-## 🚀 How to Contribute
+# 🚀 How to Contribute
 
-### 1. **Fork the Repository**
+---
+
+# 1. **Fork the Repository**
 
 Click the **Fork** button at:  
 https://github.com/ssandoval-12/KSECWATCH
 
+---
 
-### 2. **Clone Your Fork**
+# 2. **Clone Your Fork**
 
-git clone https://github.com/your-username/KSECWATCH.git
+git clone https://github.com/your-username/KSECWATCH.git <br>
 cd KSECWATCH
 
+---
 
-### 3. **Create a New Branch**
+# 3. **Create a New Branch**
 
 git checkout -b feature/your-feature-name
 
+---
 
-### 4. Make Your Changes
+# 4. Make Your Changes
 
 Examples of changes you may contribute:
 
-New Prometheus metrics
--New alerting rules
--Dashboard improvements
--Kubernetes manifest enhancements
-README or documentation updates
+- New Prometheus metrics
+- New alerting rules
+- Dashboard improvements
+- Kubernetes manifest enhancements
+- README or documentation updates
 
 Before committing:
--Validate Kubernetes YAML files:
+- Validate Kubernetes YAML files:
 kubectl apply --dry-run=client -f file.yaml
 
--Validate Prometheus rules:
+- Validate Prometheus rules:
 promtool check rules <file>
 
-### 5. Commit and Push
+---
 
-git add .
-git commit -m "Describe your change here"
-git push origin feature/your-feature-name
+# 5. Commit and Push
 
-### 6. Open a Pull Request
+git add . <br>
+git commit -m "Describe your change here" <br>
+git push origin feature/your-feature-name <br>
 
--Go to your fork on GitHub
--Click “Compare & pull request”
--Add a clear description of your change and why it’s useful
+---
 
-### 🧭 Code Style & Guidelines
+# 6. Open a Pull Request
 
--Use descriptive variable and alert names
--Follow Kubernetes YAML indentation (2 spaces)
--Keep Prometheus rules clear and simple
--Update documentation when adding new features
--Never include secrets (Slack webhook, passwords, tokens, etc.)
+- Go to your fork on GitHub
+- Click “Compare & pull request”
+- Add a clear description of your change and why it’s useful
 
-### 💬 Communication
+---
 
-For major ideas or changes, consider opening an Issue first.
-Be respectful, constructive and collaborative.
+# 🧭 Code Style & Guidelines
 
-### Thank you for helping improve KSECWATCH!
+- Use descriptive variable and alert names
+- Follow Kubernetes YAML indentation (2 spaces)
+- Keep Prometheus rules clear and simple
+- Update documentation when adding new features
+- Never include secrets (Slack webhook, passwords, tokens, etc.)
+
+---
+
+# 💬 Communication
+
+- For major ideas or changes, consider opening an Issue first.
+- Be respectful, constructive and collaborative.
+
+---
+
+# Thank you for helping improve KSECWATCH!
