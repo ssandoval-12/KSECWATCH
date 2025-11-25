@@ -18,26 +18,28 @@ The project includes a complete observability pipeline with:
 ```text
 .
 ├── application
-│ ├── main.py
-│ └── requirements.txt
+│   ├── main.py
+│   └── requirements.txt
 │
 ├── kubernetes
-│ ├── deployment.yaml
-│ ├── service.yaml
-│ ├── ksecwatch-servicemonitor.yaml
-│ ├── security-alerts.yaml
-│ ├── pod-changes-alerts.yaml
-│ └── alertmanagerconfig-ksecwatch.yaml
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── ksecwatch-servicemonitor.yaml
+│   ├── security-alerts.yaml
+│   ├── pod-changes-alerts.yaml
+│   └── alertmanagerconfig-ksecwatch.yaml
 │
 ├── dashboards
-│ └── security-pod-dashboard.json
+│   └── security-pod-dashboard.json
 │
 ├── screenshots
-│ ├── slack.png
-│ ├── alertmanager.png
-│ ├── grafana.png
-│ └── prometheus.png
+│   ├── slack.png
+│   ├── alertmanager.png
+│   ├── grafana.png
+│   └── prometheus.png
 │
+├── Dockerfile
+├── LICENSE
 ├── .gitignore
 └── README.md
 ```
@@ -81,19 +83,19 @@ minikube image load ksecwatch-app:0.1 <br>
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts <br>
 helm repo update <br>
 
-helm install kps prometheus-community/kube-prometheus-stack \ <br>
-  --namespace monitoring \ <br>
-  --set grafana.adminPassword="NuevaPass123!" \ <br>
-  --set grafana.service.type=ClusterIP \ <br>
-  --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false \ <br>
+helm install kps prometheus-community/kube-prometheus-stack  <br>
+  --namespace monitoring  <br>
+  --set grafana.adminPassword="NuevaPass123!"  <br>
+  --set grafana.service.type=ClusterIP  <br>
+  --set prometheus.prometheusSpec.serviceMonitorSelectorNilUsesHelmValues=false  <br>
   --set prometheus.prometheusSpec.ruleSelectorNilUsesHelmValues=false
 
 ---
 
 # 🔐 5. Create Secure Slack Secret
 
-kubectl create secret generic slack-webhook \ <br>
-  --from-literal=url="https://hooks.slack.com/services/XXX/YYY/ZZZ" \ <br>
+kubectl create secret generic slack-webhook  <br>
+  --from-literal=url="https://hooks.slack.com/services/XXX/YYY/ZZZ"  <br>
   -n monitoring
 
 ---
@@ -167,10 +169,16 @@ for i in {1..15}; do curl localhost:8000/login-fail; done
 ---
 
 # 🖼️ 11. Screenshots
-
+- Slack: <br>
 ![Slack Screenshot](screenshots/slack.png) <br>
+
+- Alert manager: <br>
 ![Alertmanager UI](screenshots/alertmanager.png) <br>
+
+- Grafana: <br>
 ![Grafana Dashboard](screenshots/grafana.png) <br>
+
+- Prometheus: <br>
 ![Prometheus Target](screenshots/prometheus.png)
 
 ---
@@ -194,7 +202,6 @@ ALERTS{alertstate="firing"}
 ---
 
 # 13. 🎉 KSECWATCH Completed!
-
 
 
 
