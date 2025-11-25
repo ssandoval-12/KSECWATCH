@@ -42,6 +42,7 @@ The project includes a complete observability pipeline with:
 ├── LICENSE
 ├── .gitignore
 └── README.md
+└── CONTRIBUTING.md
 ```
 ---
 
@@ -202,6 +203,7 @@ ALERTS{alertstate="firing"}
 ---
 
 # 13. 🎉 KSECWATCH Completed!
+
 
 
 
